@@ -82,20 +82,12 @@
                                         <button type="button" class="btn btn-info btn-block" id="button-help">Open Help</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-danger btn-block" id="button-clear">Delete all</button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <button type="button" class="btn btn-primary btn-block" id="button-load-sample">Load sample</button>
-                                    </div>
-                                    <div class="col-sm-6">
                                         <button type="button" class="btn btn-primary btn-block" id="button-load">Load from file</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-primary btn-block" id="button-sort">Sort</button>
+                                        <button type="button" class="btn btn-primary btn-block" id="button-load-sample">Load sample</button>
                                     </div>
                                     <div class="col-sm-6">
                                         <button type="button" class="btn btn-primary btn-block" id="button-save" onclick="ui_save_file()">Save to file</button>
@@ -104,10 +96,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-primary btn-block" id="button-filter">Map/Filter</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        
+                                        <button type="button" class="btn btn-danger btn-block" id="button-clear">Delete all</button>
                                     </div>
                                 </div>
                                 <!--<span class="help-block">Generated cards open in a new tab or window.</span>-->
@@ -115,6 +106,66 @@
                             <!-- /PANEL BODY -->
                         </div>
                       </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingDeck">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseDeck" aria-expanded="false" aria-controls="collapseDeck">
+                                    <!-- PANEL TITLE -->
+                                    Deck
+                                    <!-- /PANEL TITLE -->
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseDeck" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDeck">
+                            <div class="panel-body">
+                                <!-- PANEL BODY -->
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="selected-card" class="col-sm-2 control-label">Deck</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static" id="total_card_count">Deck contains 0 cards.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <label for="selected-card" class="control-label" style="width: 100%; margin-bottom: 1em;">Card</label>
+                                            <button type="button" class="btn btn-default btn-block btn-sm" title="Move to top" id="button-move-top">⏫</button>
+                                            <button type="button" class="btn btn-default btn-block btn-sm" title="Move up" id="button-move-up">🔼</button>
+                                            <button type="button" class="btn btn-default btn-block btn-sm" title="Move down" id="button-move-down">🔽</button>
+                                            <button type="button" class="btn btn-default btn-block btn-sm" title="Move to bottom" id="button-move-bottom">⏬</button>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="selected-card" size="15"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-primary btn-block" id="button-add-card">Add new card</button>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-primary btn-block" id="button-duplicate-card">Duplicate card</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-primary btn-block" id="button-sort">Sort</button>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-primary btn-block" id="button-filter">Map/Filter</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <button type="button" class="btn btn-danger btn-block" id="button-delete-card">Delete card</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- /PANEL BODY -->
+                            </div>
+                        </div>
                     </div>
 
 
@@ -359,30 +410,6 @@
             <div class="col-md-12 col-lg-5">
                 <!--<h3>Card</h3>-->
                 <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="selected-card" class="col-sm-2 control-label">Deck</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static" id="total_card_count">Deck contains 0 cards.</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="selected-card" class="col-sm-2 control-label">Card</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="selected-card"></select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-4">
-                            <button type="button" class="btn btn-danger btn-block" id="button-delete-card">Delete card</button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="button" class="btn btn-primary btn-block" id="button-add-card">Add new card</button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="button" class="btn btn-primary btn-block" id="button-duplicate-card">Duplicate card</button>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="card-title" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
