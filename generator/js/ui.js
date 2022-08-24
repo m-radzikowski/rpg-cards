@@ -99,6 +99,9 @@ function ui_add_cards(data) {
     ui_init_cards(data);
     card_data = card_data.concat(data);
     ui_update_card_list();
+    ui_select_card_by_index(0);
+
+    $("#collapseDeck").collapse('toggle');
 }
 
 function ui_add_new_card() {
@@ -126,7 +129,8 @@ function ui_select_card_by_index(index) {
 }
 
 function ui_selected_card_index() {
-    return parseInt($("#selected-card").val(), 10);
+    var idx = $("#selected-card").val();
+    return idx === null ? null : parseInt($("#selected-card").val(), 10);
 }
 
 function ui_selected_card() {
@@ -165,7 +169,7 @@ function ui_save_file() {
     a.href = url;
     var filename = prompt("Filename:", ui_save_file.filename);
     if (filename) {
-        a.download = filename 
+        a.download = filename
         ui_save_file.filename = filename;
         a.click();
     }
@@ -232,7 +236,7 @@ function ui_setup_color_selector() {
             .attr("data-color", val)
             .text(name));
     });
-    
+
     // Callbacks for when the user picks a color
     $('#default_color_selector').colorselector({
         callback: function (value, color, title) {
@@ -575,6 +579,40 @@ function ui_apply_default_icon_back() {
     ui_render_selected_card();
 }
 
+function ui_move_top() {
+    if (ui_selected_card_index() != null) {
+        card_data.unshift(card_data.splice(ui_selected_card_index(), 1)[0]);
+        ui_update_card_list();
+        ui_select_card_by_index(0);
+    }
+}
+
+function ui_move_bottom() {
+    if (ui_selected_card_index() !== null) {
+        card_data.push(card_data.splice(ui_selected_card_index(), 1)[0]);
+        ui_update_card_list();
+        ui_select_card_by_index(card_data.length - 1);
+    }
+}
+
+function ui_move_up() {
+    var idx = ui_selected_card_index();
+    if (idx !== null && idx > 0) {
+        [card_data[idx], card_data[idx - 1]] = [card_data[idx - 1], card_data[idx]];
+        ui_update_card_list();
+        ui_select_card_by_index(idx - 1);
+    }
+}
+
+function ui_move_down() {
+    var idx = ui_selected_card_index();
+    if (idx !== null && idx < card_data.length - 1) {
+        [card_data[idx], card_data[idx + 1]] = [card_data[idx + 1], card_data[idx]];
+        ui_update_card_list();
+        ui_select_card_by_index(idx + 1);
+    }
+}
+
 
 //Adding support for local store
 function local_store_save() {
@@ -678,6 +716,11 @@ $(document).ready(function () {
 
     $("#sort-execute").click(ui_sort_execute);
     $("#filter-execute").click(ui_filter_execute);
+
+    $("#button-move-top").click(ui_move_top);
+    $("#button-move-bottom").click(ui_move_bottom);
+    $("#button-move-up").click(ui_move_up);
+    $("#button-move-down").click(ui_move_down);
 
     ui_update_card_list();
 });
